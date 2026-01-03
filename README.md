@@ -21,7 +21,7 @@ To eliminate syntactic redundancy, our dynamic templating technique injects boil
 To avoid potential limitations in generalization, we evaluate HyFunc on an unseen benchmark dataset, BFCL. Experimental results demonstrate that HyFunc achieves an excellent balance between efficiency and performance. 
 It achieves an inference latency of 0.828 seconds, outperforming all baseline models, and reaches a performance of 80.1%, surpassing all models with a comparable parameter scale. These results suggest that HyFunc offers a more efficient paradigm for agentic AI.
 
-![result](https://github.com/MrBlankness/LightM-UNet/blob/master/assets/main_result.png)
+![teaser](https://github.com/MrBlankness/HyFunc/blob/main/images/teaser.png)
 
 ## Install Environment
 
