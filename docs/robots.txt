@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /HyFunc/
+
+Sitemap: https://mrblankness.github.io/HyFunc/sitemap.xml

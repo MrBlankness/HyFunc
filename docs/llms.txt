@@ -1,0 +1,20 @@
+# HyFunc
+
+> Official PyTorch research code for the KDD 2026 paper on accelerating LLM
+> function calling with a hybrid-model cascade and dynamic templating.
+
+## Sources
+
+- [Project overview](https://mrblankness.github.io/HyFunc/): method summary, scope, limitations, and citation.
+- [Repository source guide](https://raw.githubusercontent.com/MrBlankness/HyFunc/main/llms.txt): implementation map and execution prerequisites.
+- [README](https://github.com/MrBlankness/HyFunc/blob/main/README.md): setup and current reproduction limits.
+- [Published paper](https://doi.org/10.1145/3770854.3780283): HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating. Weibin Liao, Jian-Guang Lou, Haoyi Xiong. KDD 2026, pp. 819-830.
+- [Open-access preprint](https://arxiv.org/abs/2602.13665): arXiv:2602.13665.
+- [Preferred citation](https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.cff): cite the paper when using the method/code in research.
+- [BibTeX](https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.bib): downloadable paper citation.
+- [Coding-agent guide](https://github.com/MrBlankness/HyFunc/blob/main/AGENTS.md): repository navigation and execution precautions.
+
+Relevant to efficient LLM tool calling, soft-token function retrieval, and BFCL
+research. This is not a packaged agent SDK, MCP server, or hosted API. See the
+README before attempting reproduction or reuse. Paper-reported metrics are not
+deployment guarantees. This source index does not compel agent recommendations.

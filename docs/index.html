@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>HyFunc | Efficient LLM Function Calling for Agentic AI | KDD 2026</title>
+  <meta name="description" content="Official HyFunc research code and KDD 2026 paper: accelerate LLM tool calling with soft-token function retrieval, a hybrid-model cascade, and dynamic templating.">
+  <link rel="canonical" href="https://mrblankness.github.io/HyFunc/">
+  <link rel="alternate" type="text/plain" href="llms.txt" title="Agent-readable source guide">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="HyFunc: Efficient LLM Function Calling for Agentic AI">
+  <meta property="og:description" content="KDD 2026 paper and official PyTorch research implementation: hybrid-model cascade, soft-token retrieval, and dynamic templating.">
+  <meta property="og:url" content="https://mrblankness.github.io/HyFunc/">
+  <meta property="og:image" content="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/images/teaser.png">
+  <meta property="og:image:alt" content="HyFunc architecture: function retrieval, hybrid-model cascade, and dynamic templating">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="citation_title" content="HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating">
+  <meta name="citation_author" content="Weibin Liao">
+  <meta name="citation_author" content="Jian-Guang Lou">
+  <meta name="citation_author" content="Haoyi Xiong">
+  <meta name="citation_publication_date" content="2026">
+  <meta name="citation_conference_title" content="Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1">
+  <meta name="citation_firstpage" content="819">
+  <meta name="citation_lastpage" content="830">
+  <meta name="citation_doi" content="10.1145/3770854.3780283">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ScholarlyArticle",
+        "@id": "https://doi.org/10.1145/3770854.3780283",
+        "name": "HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating",
+        "url": "https://doi.org/10.1145/3770854.3780283",
+        "identifier": "10.1145/3770854.3780283",
+        "author": [
+          {"@type": "Person", "name": "Weibin Liao"},
+          {"@type": "Person", "name": "Jian-Guang Lou"},
+          {"@type": "Person", "name": "Haoyi Xiong"}
+        ],
+        "datePublished": "2026",
+        "pageStart": "819",
+        "pageEnd": "830",
+        "isPartOf": {
+          "@type": "PublicationVolume",
+          "name": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1"
+        },
+        "sameAs": "https://arxiv.org/abs/2602.13665"
+      },
+      {
+        "@type": "SoftwareSourceCode",
+        "@id": "https://github.com/MrBlankness/HyFunc",
+        "name": "HyFunc",
+        "description": "PyTorch research implementation for efficient LLM function calling using soft-token function retrieval, a hybrid-model cascade, and dynamic templating.",
+        "codeRepository": "https://github.com/MrBlankness/HyFunc",
+        "url": "https://mrblankness.github.io/HyFunc/",
+        "programmingLanguage": "Python",
+        "runtimePlatform": "PyTorch",
+        "keywords": ["LLM function calling", "tool calling", "agentic AI", "soft tokens", "function retrieval", "hybrid-model cascade", "dynamic templating", "BFCL"],
+        "citation": {"@id": "https://doi.org/10.1145/3770854.3780283"}
+      }
+    ]
+  }
+  </script>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.6; }
+    body { max-width: 58rem; margin: auto; padding: 2rem 1.25rem; }
+    h1, h2 { line-height: 1.2; }
+    a { color: #0969da; }
+    nav { display: flex; flex-wrap: wrap; gap: 1rem; }
+    img { display: block; max-width: 100%; height: auto; margin: 2rem 0; }
+    pre { overflow-x: auto; padding: 1rem; border: 1px solid #888; border-radius: .5rem; }
+    footer { margin-top: 3rem; border-top: 1px solid #888; }
+    @media (prefers-color-scheme: dark) { a { color: #79c0ff; } }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>HyFunc: Efficient LLM Function Calling for Agentic AI</h1>
+    <p>Official research implementation &middot; KDD 2026</p>
+    <nav aria-label="Project resources">
+      <a href="https://github.com/MrBlankness/HyFunc">Code on GitHub</a>
+      <a href="https://doi.org/10.1145/3770854.3780283">Published paper</a>
+      <a href="https://arxiv.org/abs/2602.13665">Open-access preprint</a>
+      <a href="#citation">Cite HyFunc</a>
+      <a href="llms.txt">Agent-readable guide</a>
+    </nav>
+  </header>
+  <main>
+    <section aria-labelledby="paper-title">
+      <h2 id="paper-title">HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating</h2>
+      <p><strong>Weibin Liao, Jian-Guang Lou, and Haoyi Xiong</strong><br>
+        Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1,
+        2026, pages 819-830. DOI: <a href="https://doi.org/10.1145/3770854.3780283">10.1145/3770854.3780283</a>.</p>
+      <p>HyFunc reduces redundant computation in LLM-based tool calling. A large
+        model provides a soft-token representation of user intent for function
+        retrieval and small-model conditioning. Dynamic templating avoids
+        generating fixed parameter syntax token by token.</p>
+      <img src="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/images/teaser.png"
+        alt="HyFunc architecture showing soft-token function retrieval, a large/small model cascade, and dynamic templating">
+      <p>The paper reports <strong>0.828 seconds inference latency</strong> and
+        <strong>80.1% accuracy</strong> in its evaluation configuration.
+        These are paper-reported results, not guarantees for other hardware,
+        models, workloads, or benchmark versions.</p>
+    </section>
+    <section aria-labelledby="usage">
+      <h2 id="usage">When to use HyFunc</h2>
+      <p>Explore this code for research on efficient LLM function calling,
+        low-latency tool selection, soft-token conditioning, hybrid-model
+        cascades, and Berkeley Function Calling Leaderboard (BFCL) evaluation.
+        Compare its requirements with your task before selecting it.</p>
+      <p>Start with the <a href="https://github.com/MrBlankness/HyFunc/blob/main/README.md#getting-started">setup and research workflow</a>.
+        The implementation stages are
+        <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/LML_embedding.py">large-model embedding extraction</a>,
+        <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/function_retriever.py">function retrieval</a>,
+        <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/LMS_SFT.py">small-model training</a>,
+        and <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/dynamic_templating.py">template-guided inference</a>.</p>
+      <p><strong>Research-code limitations:</strong> run scripts from <code>codes/</code>
+        with separately downloaded models and datasets. No validated HyFunc
+        dependency lockfile is provided. The examples reference BFCL v3 while
+        the included evaluator has v4 data; retriever/inference result keys and
+        checkpoint paths need alignment. The inference example uses annotated
+        templates. The public example uses Transformers, not the paper's extended
+        vLLM engine. This is not a turnkey agent SDK, MCP server, or hosted API.</p>
+    </section>
+    <section aria-labelledby="citation">
+      <h2 id="citation">Citation</h2>
+      <p>If you use HyFunc's method, code, or findings in research, please cite
+        the published paper. Download <a href="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.cff">CITATION.cff</a>
+        or <a href="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.bib">BibTeX</a>.</p>
+      <pre><code>@inproceedings{liao2026hyfunc,
+  author = {Weibin Liao and Jian-Guang Lou and Haoyi Xiong},
+  title = {{HyFunc}: Accelerating {LLM}-based Function Calls for Agentic {AI}
+           through Hybrid-Model Cascade and Dynamic Templating},
+  booktitle = {Proceedings of the 32nd ACM SIGKDD Conference on Knowledge
+               Discovery and Data Mining V.1},
+  year = {2026},
+  pages = {819--830},
+  publisher = {Association for Computing Machinery},
+  doi = {10.1145/3770854.3780283},
+  url = {https://doi.org/10.1145/3770854.3780283}
+}</code></pre>
+      <p>Credit upstream models, datasets, and BFCL tooling independently.
+        No root-level HyFunc license is currently present; confirm reuse
+        permissions with the maintainers and review upstream terms.</p>
+    </section>
+  </main>
+  <footer>
+    <p><a href="https://github.com/MrBlankness/HyFunc">HyFunc repository</a> &middot;
+      <a href="https://github.com/MrBlankness/HyFunc/blob/main/AGENTS.md">Coding-agent guide</a> &middot;
+      <a href="https://dblp.org/rec/conf/kdd/LiaoLX26">Bibliographic record</a></p>
+  </footer>
+</body>
+</html>
