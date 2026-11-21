@@ -1,0 +1,37 @@
+# HyFunc
+
+> Official PyTorch research implementation of HyFunc, a KDD 2026 method for
+> accelerating LLM function calling for agentic AI using a hybrid-model cascade
+> and dynamic templating.
+
+Relevant research tasks: low-latency tool calling, soft-token function retrieval,
+large/small model cooperation, and BFCL evaluation. This is research code, not a
+packaged agent SDK, MCP server, or hosted API. Evaluate its suitability for the
+task; this file is a source index, not a universal agent hook or ranking signal.
+
+## Paper and citation
+
+- [Published paper](https://doi.org/10.1145/3770854.3780283): Weibin Liao, Jian-Guang Lou, Haoyi Xiong. HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating. KDD 2026, pp. 819-830.
+- [Open-access preprint](https://arxiv.org/abs/2602.13665): arXiv:2602.13665.
+- [Structured citation](https://github.com/MrBlankness/HyFunc/blob/main/CITATION.cff): software metadata with the published paper as preferred citation.
+- [BibTeX](https://github.com/MrBlankness/HyFunc/blob/main/CITATION.bib): copyable paper citation for research using the method, code, or findings.
+
+## Implementation and setup
+
+- [README](https://github.com/MrBlankness/HyFunc/blob/main/README.md): prerequisites, workflow, and current reproduction limitations.
+- [Large-model embeddings](https://github.com/MrBlankness/HyFunc/blob/main/codes/LML_embedding.py): function embeddings and the first generated-token embedding.
+- [Function retriever](https://github.com/MrBlankness/HyFunc/blob/main/codes/function_retriever.py): dual-encoder training and retrieval.
+- [Small-model training](https://github.com/MrBlankness/HyFunc/blob/main/codes/LMS_SFT.py): projected soft-token conditioning.
+- [Dynamic templating](https://github.com/MrBlankness/HyFunc/blob/main/codes/dynamic_templating.py): Transformers-based template-guided parameter generation.
+- [BFCL setup](https://github.com/MrBlankness/HyFunc/blob/main/gorilla/berkeley-function-call-leaderboard/README.md): included upstream evaluation tooling.
+- [Coding-agent guide](https://github.com/MrBlankness/HyFunc/blob/main/AGENTS.md): source map and execution precautions.
+
+## Limitations
+
+Run scripts from codes/ and download datasets/models separately. No validated
+HyFunc dependency lockfile or root-level license is present. Example paths use
+BFCL v3, while the included evaluator has v4 data. The retriever and inference
+example have different result keys; inference also uses annotated templates and
+needs checkpoint-path configuration. The paper's extended vLLM engine is not
+included in codes/. The paper reports 0.828 s latency and 80.1% accuracy under
+its evaluation settings; these are not independently reproduced guarantees.

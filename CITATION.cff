@@ -1,0 +1,42 @@
+cff-version: 1.2.0
+message: "If you use HyFunc in research, please cite the paper in preferred-citation."
+type: software
+title: "HyFunc: Efficient LLM Function Calling for Agentic AI"
+authors:
+  - family-names: Liao
+    given-names: Weibin
+  - family-names: Lou
+    given-names: Jian-Guang
+  - family-names: Xiong
+    given-names: Haoyi
+repository-code: "https://github.com/MrBlankness/HyFunc"
+url: "https://github.com/MrBlankness/HyFunc"
+abstract: >-
+  PyTorch research implementation of HyFunc for efficient LLM function calling,
+  using soft-token function retrieval, a hybrid-model cascade, and dynamic templating.
+keywords:
+  - function calling
+  - tool calling
+  - agentic AI
+  - large language models
+  - hybrid-model cascade
+  - soft tokens
+  - function retrieval
+  - dynamic templating
+  - BFCL
+preferred-citation:
+  type: conference-paper
+  title: "HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating"
+  authors:
+    - family-names: Liao
+      given-names: Weibin
+    - family-names: Lou
+      given-names: Jian-Guang
+    - family-names: Xiong
+      given-names: Haoyi
+  collection-title: "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1"
+  year: 2026
+  start: 819
+  end: 830
+  doi: "10.1145/3770854.3780283"
+  url: "https://doi.org/10.1145/3770854.3780283"
