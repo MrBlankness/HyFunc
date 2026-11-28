@@ -47,15 +47,47 @@ GitHub's citation affordance with the published paper as the preferred citation.
 gh repo edit MrBlankness/HyFunc --homepage "https://mrblankness.github.io/HyFunc/"
 ```
 
-The canonical URL, Open Graph URL, JSON-LD software URL, sitemap, and site
+The canonical URL, Open Graph and Twitter URLs, JSON-LD URLs, sitemap, and site
 `llms.txt` assume this default GitHub Pages address. If using a custom domain,
 update all of them together and configure the domain in Pages settings.
 
-The site includes semantic HTML, a descriptive title/meta description,
-Open Graph image metadata, scholarly `citation_*` metadata, and Schema.org
-`ScholarlyArticle` / `SoftwareSourceCode` JSON-LD. Structured data aids
+The site includes semantic, crawlable method descriptions and research FAQs,
+a descriptive title/meta description, a self-hosted 1200-by-630 PNG social
+preview, scholarly `citation_*` metadata with an open-access PDF link, and
+connected Schema.org `WebSite`, `WebPage`, `ScholarlyArticle`, and
+`SoftwareSourceCode` JSON-LD. Structured data aids
 interpretation but does not guarantee a Google rich result or Scholar listing.
 No license, release version, or unverified performance claim is invented.
+
+## Maintaining the project site
+
+`index.html`, `site.css`, and `site.js` are served directly, without a frontend
+build or third-party font/script requests. Both light and dark themes follow
+system appearance until the visitor explicitly switches; the preference is
+stored locally in the visitor's browser. Content, navigation, research FAQs,
+and the citation remain available without JavaScript.
+
+`assets/architecture.svg` is a theme-aware, accessible conceptual diagram,
+not a live inference trace. It is horizontally scrollable on small screens
+to preserve label readability. `assets/social-card.svg` is the editable source
+for `assets/social-card.png`; regenerate the PNG at exactly 1200 by 630 after
+editing it, because social crawlers do not consistently support SVG previews.
+Keep Open Graph, Twitter, and JSON-LD image URLs and dimensions synchronized.
+Update the sitemap's `lastmod` only when the page meaningfully changes.
+
+Preview from the repository root:
+
+```sh
+python -m http.server 8000 --directory docs
+```
+
+Check both themes on desktop and mobile, keyboard navigation, reduced-motion
+preferences, and the citation copy/download controls before publishing.
+Run the dependency-free metadata, citation, and static-asset regression checks
+from the repository root with
+`python -m unittest discover -s tests -p 'test_site.py'`.
+Publication metadata must stay consistent with `CITATION.cff` and
+`CITATION.bib`; latency and accuracy must remain labeled as paper-reported.
 
 ## Google indexing
 

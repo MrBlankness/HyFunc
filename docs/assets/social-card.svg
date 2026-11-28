@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">HyFunc: Efficient LLM Function Calling</title>
+  <desc id="description">Official KDD 2026 research and code. Soft-token retrieval, a hybrid-model cascade, and dynamic templating reduce redundant work in LLM tool calling.</desc>
+  <defs>
+    <radialGradient id="glow"><stop stop-color="#223e21"/><stop offset="1" stop-color="#080f0c"/></radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse"><path d="M48 0H0v48" fill="none" stroke="#d6fb98" stroke-opacity=".055"/></pattern>
+  </defs>
+  <rect width="1200" height="630" fill="#080f0c"/>
+  <ellipse cx="950" cy="245" rx="490" ry="410" fill="url(#glow)"/>
+  <rect width="1200" height="630" fill="url(#grid)"/>
+  <g font-family="Segoe UI, sans-serif">
+    <rect x="60" y="54" width="54" height="54" rx="16" fill="#1a2b20" stroke="#34512e"/>
+    <path d="M77 68v26m20-26v26M77 81h20m-10-13v13" fill="none" stroke="#d6fb98" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="87" cy="68" r="3.5" fill="#d6fb98"/>
+    <text x="129" y="91" fill="#edf5e9" font-size="34" font-weight="700" letter-spacing="-1.5">HyFunc</text>
+    <rect x="942" y="59" width="198" height="42" rx="21" fill="#142019" stroke="#34512e"/>
+    <text x="1041" y="85" fill="#d6fb98" font-size="15" font-weight="600" text-anchor="middle" letter-spacing="1">KDD 2026 RESEARCH</text>
+    <text x="60" y="214" fill="#edf5e9" font-size="66" font-weight="650" letter-spacing="-3">LLM function calling.</text>
+    <text x="60" y="292" fill="#d6fb98" font-size="66" font-weight="650" letter-spacing="-3">Less is faster.</text>
+    <text x="62" y="356" fill="#abbaad" font-size="23">One soft token. A focused retriever. A smaller model.</text>
+    <g fill="#142019" stroke="#34512e">
+      <rect x="62" y="421" width="280" height="76" rx="14"/>
+      <rect x="379" y="421" width="280" height="76" rx="14"/>
+      <rect x="696" y="421" width="280" height="76" rx="14"/>
+    </g>
+    <g fill="#edf5e9" font-size="21" font-weight="600" text-anchor="middle">
+      <text x="202" y="468">Soft-token retrieval</text>
+      <text x="519" y="468">Hybrid-model cascade</text>
+      <text x="836" y="468">Dynamic templating</text>
+    </g>
+    <path d="M350 459h20m-6-6 6 6-6 6m303-6h20m-6-6 6 6-6 6" fill="none" stroke="#d6fb98" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M62 537h1078" stroke="#26372a"/>
+    <text x="62" y="578" fill="#abbaad" font-size="18">Official paper &amp; PyTorch research implementation</text>
+    <text x="1140" y="578" fill="#d6fb98" font-size="18" text-anchor="end">mrblankness.github.io/HyFunc</text>
+  </g>
+</svg>

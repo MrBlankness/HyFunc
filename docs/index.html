@@ -3,17 +3,30 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>HyFunc | Efficient LLM Function Calling for Agentic AI | KDD 2026</title>
-  <meta name="description" content="Official HyFunc research code and KDD 2026 paper: accelerate LLM tool calling with soft-token function retrieval, a hybrid-model cascade, and dynamic templating.">
+  <title>HyFunc: Efficient LLM Function Calling | KDD 2026</title>
+  <meta name="description" content="HyFunc's KDD 2026 paper and official PyTorch code for efficient LLM tool calling: soft-token retrieval, a hybrid-model cascade, and dynamic templating.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="theme-color" content="#f5f7f1">
+  <meta name="color-scheme" content="light dark">
   <link rel="canonical" href="https://mrblankness.github.io/HyFunc/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
   <link rel="alternate" type="text/plain" href="llms.txt" title="Agent-readable source guide">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="HyFunc">
+  <meta property="og:locale" content="en_US">
   <meta property="og:title" content="HyFunc: Efficient LLM Function Calling for Agentic AI">
-  <meta property="og:description" content="KDD 2026 paper and official PyTorch research implementation: hybrid-model cascade, soft-token retrieval, and dynamic templating.">
+  <meta property="og:description" content="Less redundant work, more focused intelligence. Explore the KDD 2026 paper and official code for hybrid-model tool calling.">
   <meta property="og:url" content="https://mrblankness.github.io/HyFunc/">
-  <meta property="og:image" content="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/images/teaser.png">
-  <meta property="og:image:alt" content="HyFunc architecture: function retrieval, hybrid-model cascade, and dynamic templating">
+  <meta property="og:image" content="https://mrblankness.github.io/HyFunc/assets/social-card.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="HyFunc, KDD 2026: efficient LLM function calling through soft-token retrieval, a hybrid-model cascade, and dynamic templating">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="HyFunc: Efficient LLM Function Calling">
+  <meta name="twitter:description" content="KDD 2026 research on soft-token retrieval, hybrid-model cascades, and dynamic templating for agentic AI.">
+  <meta name="twitter:image" content="https://mrblankness.github.io/HyFunc/assets/social-card.png">
+  <meta name="twitter:image:alt" content="HyFunc: less overhead for LLM function calling. Official KDD 2026 research and code.">
   <meta name="citation_title" content="HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating">
   <meta name="citation_author" content="Weibin Liao">
   <meta name="citation_author" content="Jian-Guang Lou">
@@ -23,16 +36,43 @@
   <meta name="citation_firstpage" content="819">
   <meta name="citation_lastpage" content="830">
   <meta name="citation_doi" content="10.1145/3770854.3780283">
+  <meta name="citation_pdf_url" content="https://arxiv.org/pdf/2602.13665">
+  <meta name="citation_language" content="en">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://mrblankness.github.io/HyFunc/#website",
+        "name": "HyFunc",
+        "url": "https://mrblankness.github.io/HyFunc/",
+        "description": "Official project site for HyFunc, KDD 2026 research on efficient LLM function calling.",
+        "inLanguage": "en"
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://mrblankness.github.io/HyFunc/#webpage",
+        "name": "HyFunc: Efficient LLM Function Calling",
+        "url": "https://mrblankness.github.io/HyFunc/",
+        "inLanguage": "en",
+        "isPartOf": {"@id": "https://mrblankness.github.io/HyFunc/#website"},
+        "about": {"@id": "https://github.com/MrBlankness/HyFunc"},
+        "mainEntity": {"@id": "https://doi.org/10.1145/3770854.3780283"},
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://mrblankness.github.io/HyFunc/assets/social-card.png",
+          "width": 1200,
+          "height": 630
+        }
+      },
       {
         "@type": "ScholarlyArticle",
         "@id": "https://doi.org/10.1145/3770854.3780283",
         "name": "HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating",
         "url": "https://doi.org/10.1145/3770854.3780283",
         "identifier": "10.1145/3770854.3780283",
+        "abstract": "HyFunc addresses redundant computation in LLM-based function calling. A large model distills user intent into a single soft token for function retrieval and small-model conditioning, while dynamic templating avoids generating fixed parameter syntax token by token.",
         "author": [
           {"@type": "Person", "name": "Weibin Liao"},
           {"@type": "Person", "name": "Jian-Guang Lou"},
@@ -45,6 +85,8 @@
           "@type": "PublicationVolume",
           "name": "Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1"
         },
+        "mainEntityOfPage": {"@id": "https://mrblankness.github.io/HyFunc/#webpage"},
+        "keywords": ["LLM function calling", "agentic AI", "hybrid-model cascade", "dynamic templating", "soft-token retrieval", "BFCL"],
         "sameAs": "https://arxiv.org/abs/2602.13665"
       },
       {
@@ -62,73 +104,320 @@
     ]
   }
   </script>
-  <style>
-    :root { color-scheme: light dark; font-family: system-ui, sans-serif; line-height: 1.6; }
-    body { max-width: 58rem; margin: auto; padding: 2rem 1.25rem; }
-    h1, h2 { line-height: 1.2; }
-    a { color: #0969da; }
-    nav { display: flex; flex-wrap: wrap; gap: 1rem; }
-    img { display: block; max-width: 100%; height: auto; margin: 2rem 0; }
-    pre { overflow-x: auto; padding: 1rem; border: 1px solid #888; border-radius: .5rem; }
-    footer { margin-top: 3rem; border-top: 1px solid #888; }
-    @media (prefers-color-scheme: dark) { a { color: #79c0ff; } }
-  </style>
+  <script src="site.js"></script>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
-  <header>
-    <h1>HyFunc: Efficient LLM Function Calling for Agentic AI</h1>
-    <p>Official research implementation &middot; KDD 2026</p>
-    <nav aria-label="Project resources">
-      <a href="https://github.com/MrBlankness/HyFunc">Code on GitHub</a>
-      <a href="https://doi.org/10.1145/3770854.3780283">Published paper</a>
-      <a href="https://arxiv.org/abs/2602.13665">Open-access preprint</a>
-      <a href="#citation">Cite HyFunc</a>
-      <a href="llms.txt">Agent-readable guide</a>
-    </nav>
+  <svg class="icon-sprite" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs>
+      <symbol id="icon-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-6-6 6 6-6 6"/></symbol>
+      <symbol id="icon-external" viewBox="0 0 24 24"><path d="m7 17 10-10M7 7h10v10"/></symbol>
+      <symbol id="icon-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M20.5 14.2A9 9 0 0 1 9.8 3.5a9 9 0 1 0 10.7 10.7Z"/></symbol>
+      <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+      <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M6 18 18 6"/></symbol>
+      <symbol id="icon-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4H4v12h4"/></symbol>
+    </defs>
+  </svg>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./" aria-label="HyFunc home">
+        <svg class="brand-logo" viewBox="0 0 36 36" width="36" height="36" aria-hidden="true">
+          <rect class="logo-panel" x="1" y="1" width="34" height="34" rx="10"/>
+          <path class="logo-mark" d="M11 10v16m14-16v16M11 18h14m-7-8v8"/>
+          <circle class="logo-node" cx="18" cy="10" r="2.5"/>
+        </svg>
+        <span>HyFunc<span class="brand-caption">RESEARCH</span></span>
+      </a>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to dark theme" hidden>
+        <svg class="icon theme-sun" aria-hidden="true"><use href="#icon-sun"/></svg>
+        <svg class="icon theme-moon" aria-hidden="true"><use href="#icon-moon"/></svg>
+        <span class="theme-label">Dark</span>
+      </button>
+      <button class="menu-toggle" id="menu-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open navigation" hidden>
+        <svg class="icon menu-open-icon" aria-hidden="true"><use href="#icon-menu"/></svg>
+        <svg class="icon menu-close-icon" aria-hidden="true"><use href="#icon-close"/></svg>
+      </button>
+      <nav class="site-nav" id="site-nav" aria-label="Main navigation">
+        <a href="#method">Method</a>
+        <a href="#results">Results</a>
+        <a href="#research">Research</a>
+        <a href="#citation">Citation</a>
+      </nav>
+      <a class="button button-small header-code" href="https://github.com/MrBlankness/HyFunc">
+        View code <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg>
+      </a>
+    </div>
+    <p class="container preference-status" id="theme-status" role="status" aria-live="polite"></p>
   </header>
-  <main>
-    <section aria-labelledby="paper-title">
-      <h2 id="paper-title">HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating</h2>
-      <p><strong>Weibin Liao, Jian-Guang Lou, and Haoyi Xiong</strong><br>
-        Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1,
-        2026, pages 819-830. DOI: <a href="https://doi.org/10.1145/3770854.3780283">10.1145/3770854.3780283</a>.</p>
-      <p>HyFunc reduces redundant computation in LLM-based tool calling. A large
-        model provides a soft-token representation of user intent for function
-        retrieval and small-model conditioning. Dynamic templating avoids
-        generating fixed parameter syntax token by token.</p>
-      <img src="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/images/teaser.png"
-        alt="HyFunc architecture showing soft-token function retrieval, a large/small model cascade, and dynamic templating">
-      <p>The paper reports <strong>0.828 seconds inference latency</strong> and
-        <strong>80.1% accuracy</strong> in its evaluation configuration.
-        These are paper-reported results, not guarantees for other hardware,
-        models, workloads, or benchmark versions.</p>
+  <main id="main">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="badge"><span class="badge-dot"></span>KDD 2026 &middot; Official research</span>
+          <h1 id="hero-title"><span class="visually-hidden">HyFunc: </span>LLM function calling.<span class="hero-emphasis">Less is faster.</span></h1>
+          <p class="hero-description">One soft token. A focused retriever. A smaller model.
+            HyFunc accelerates tool calling for agentic AI by spending compute on
+            intent and parameter values, not repeated context and boilerplate.</p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="https://doi.org/10.1145/3770854.3780283">
+              Read the paper <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg>
+            </a>
+            <a class="button" href="https://github.com/MrBlankness/HyFunc">
+              Explore the code <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg>
+            </a>
+          </div>
+          <div class="hero-authors">
+            <span class="small-label">THE RESEARCH TEAM</span>
+            <p>Weibin Liao <span>&middot;</span> Jian-Guang Lou <span>&middot;</span> Haoyi Xiong</p>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="signal-card">
+            <div class="console-header">
+              <span><span class="console-dot"></span>HYBRID-MODEL CASCADE</span>
+              <span class="panel-tag">SCHEMATIC</span>
+            </div>
+            <div class="query-card">
+              <span class="small-label">USER INTENT</span>
+              <p>&ldquo;What's the weather in Palo Alto?&rdquo;</p>
+            </div>
+            <svg class="signal-diagram" viewBox="0 0 460 228" role="img" aria-labelledby="signal-title signal-description">
+              <title id="signal-title">One intent representation, two focused tasks</title>
+              <desc id="signal-description">The large model produces a soft token. It guides function retrieval and, through a projection, conditions the small model. Retrieved functions also guide the small model.</desc>
+              <defs>
+                <marker id="signal-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="diagram-arrowhead" d="m0 0 10 5-10 5Z"/></marker>
+              </defs>
+              <path class="diagram-connector" d="M204 51h70" marker-end="url(#signal-arrow)"/>
+              <path class="diagram-connector" d="M310 78v34H118v27" marker-end="url(#signal-arrow)"/>
+              <path class="diagram-connector" d="M310 112h32v27" marker-end="url(#signal-arrow)"/>
+              <path class="diagram-connector" d="M216 172h27" marker-end="url(#signal-arrow)"/>
+              <rect class="diagram-box" x="20" y="20" width="184" height="62" rx="12"/>
+              <text class="diagram-label" x="38" y="44">LARGE MODEL</text>
+              <text class="diagram-body" x="38" y="66">Encode user intent</text>
+              <rect class="token-halo" x="278" y="19" width="64" height="64" rx="19"/>
+              <rect class="token-core" x="288" y="29" width="44" height="44" rx="12"/>
+              <path class="token-vector" d="M298 51v-8m8 18V39m8 17V46m8 15V41"/>
+              <text class="diagram-token-label" x="310" y="99" text-anchor="middle">one soft token</text>
+              <rect class="diagram-box" x="20" y="140" width="196" height="64" rx="12"/>
+              <text class="diagram-label" x="38" y="165">FUNCTION RETRIEVER</text>
+              <text class="diagram-body" x="38" y="188">Choose relevant tools</text>
+              <rect class="diagram-box" x="244" y="140" width="196" height="64" rx="12"/>
+              <text class="diagram-label" x="262" y="165">SMALL MODEL</text>
+              <text class="diagram-body" x="262" y="188">Generate parameter values</text>
+              <text class="diagram-footnote" x="376" y="132" text-anchor="middle">projection</text>
+            </svg>
+            <div class="sample-output">
+              <span class="small-label">TEMPLATE-GUIDED FUNCTION CALL</span>
+              <pre><code><span class="call-name">get_weather</span>(
+  location=<span class="call-value">"Palo Alto"</span>,
+  time=<span class="call-value">"today"</span>
+)</code></pre>
+              <div class="output-legend"><span class="legend-dot"></span>Generate values. Inject fixed syntax.</div>
+            </div>
+          </div>
+          <p class="visual-caption">Illustrative call, not live model inference.</p>
+        </div>
+      </div>
     </section>
-    <section aria-labelledby="usage">
-      <h2 id="usage">When to use HyFunc</h2>
-      <p>Explore this code for research on efficient LLM function calling,
-        low-latency tool selection, soft-token conditioning, hybrid-model
-        cascades, and Berkeley Function Calling Leaderboard (BFCL) evaluation.
-        Compare its requirements with your task before selecting it.</p>
-      <p>Start with the <a href="https://github.com/MrBlankness/HyFunc/blob/main/README.md#getting-started">setup and research workflow</a>.
-        The implementation stages are
-        <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/LML_embedding.py">large-model embedding extraction</a>,
-        <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/function_retriever.py">function retrieval</a>,
-        <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/LMS_SFT.py">small-model training</a>,
-        and <a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/dynamic_templating.py">template-guided inference</a>.</p>
-      <p><strong>Research-code limitations:</strong> run scripts from <code>codes/</code>
-        with separately downloaded models and datasets. No validated HyFunc
-        dependency lockfile is provided. The examples reference BFCL v3 while
-        the included evaluator has v4 data; retriever/inference result keys and
-        checkpoint paths need alignment. The inference example uses annotated
-        templates. The public example uses Transformers, not the paper's extended
-        vLLM engine. This is not a turnkey agent SDK, MCP server, or hosted API.</p>
+    <section class="container results" id="results" aria-labelledby="results-title">
+      <div class="results-header">
+        <h2 class="small-label" id="results-title">RESULTS AT A GLANCE</h2>
+        <span class="small-label">EVALUATED ON BFCL</span>
+      </div>
+      <div class="metric-grid">
+        <article class="metric">
+          <span class="metric-source">PAPER-REPORTED</span>
+          <p class="metric-value">0.828 <span>s</span></p>
+          <h3>Inference latency</h3>
+          <p>A shorter path from intent to a function call.</p>
+        </article>
+        <article class="metric">
+          <span class="metric-source">PAPER-REPORTED</span>
+          <p class="metric-value">80.1<span>%</span></p>
+          <h3>Function-calling accuracy</h3>
+          <p>Efficiency evaluated alongside task performance.</p>
+        </article>
+        <article class="metric">
+          <span class="metric-source">METHOD DESIGN</span>
+          <p class="metric-value">1 <span>soft token</span></p>
+          <h3>Shared intent representation</h3>
+          <p>Connect large-model understanding with focused generation.</p>
+        </article>
+      </div>
+      <p class="results-note">Latency and accuracy are reported under the paper's experimental configuration,
+        not independently reproduced here or guaranteed for other hardware, models, workloads, or BFCL versions.</p>
     </section>
-    <section aria-labelledby="citation">
-      <h2 id="citation">Citation</h2>
-      <p>If you use HyFunc's method, code, or findings in research, please cite
-        the published paper. Download <a href="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.cff">CITATION.cff</a>
-        or <a href="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.bib">BibTeX</a>.</p>
-      <pre><code>@inproceedings{liao2026hyfunc,
+    <section class="section container" id="method" aria-labelledby="method-title">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">THE METHOD</p>
+          <h2 id="method-title">Three redundancies.<br>One focused pipeline.</h2>
+        </div>
+        <p class="section-description">Instead of asking a large language model to do everything,
+          HyFunc separates understanding, function retrieval, and parameter generation.</p>
+      </div>
+      <div class="mechanism-grid">
+        <article class="mechanism-card">
+          <span class="step-index">01 <span>/ UNDERSTAND</span></span>
+          <h3>Compress the intent.</h3>
+          <p>A large model distills user intent into a single soft token, avoiding
+            repeated processing of a full library of function descriptions.</p>
+        </article>
+        <article class="mechanism-card">
+          <span class="step-index">02 <span>/ RETRIEVE &amp; DELEGATE</span></span>
+          <h3>Use the right model.</h3>
+          <p>A dual-encoder retriever selects relevant functions. The projected
+            soft token conditions a smaller, prefix-tuned model.</p>
+        </article>
+        <article class="mechanism-card">
+          <span class="step-index">03 <span>/ GENERATE</span></span>
+          <h3>Skip the boilerplate.</h3>
+          <p>Dynamic templating injects fixed parameter syntax on the fly,
+            focusing model generation on the values that actually change.</p>
+        </article>
+      </div>
+      <figure class="architecture-figure">
+        <div class="diagram-scroll" tabindex="0" role="region" aria-label="HyFunc architecture diagram; scroll horizontally on small screens">
+          <img src="assets/architecture.svg" width="1152" height="420" loading="lazy" decoding="async"
+            alt="HyFunc pipeline: a user request enters the large model; one soft token guides function retrieval and projected small-model conditioning; selected functions and dynamic templates produce the final call.">
+        </div>
+        <figcaption><span>From user intent to a structured function call. A conceptual view of the paper's method.</span><span class="diagram-hint">Scroll to explore &rarr;</span></figcaption>
+      </figure>
+    </section>
+    <section class="container templating" id="templating" aria-labelledby="templating-title">
+      <div class="template-panel">
+        <div>
+          <p class="kicker">DYNAMIC TEMPLATING</p>
+          <h2 id="templating-title">Predict the values.<br>Not the punctuation.</h2>
+          <p>Function names, parameter keys, and fixed syntax do not need to be
+            rediscovered at every token. Templates supply the structure; the
+            small model concentrates on request-specific parameter values.</p>
+          <a class="text-link" href="https://github.com/MrBlankness/HyFunc/blob/main/codes/dynamic_templating.py">
+            Inspect the inference example <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg>
+          </a>
+        </div>
+        <div class="token-card">
+          <span class="small-label">A FUNCTION CALL, DECOMPOSED</span>
+          <pre class="token-code"><code><span class="fixed">get_weather(</span>
+  <span class="fixed">location=</span><span class="generated">"Palo Alto"</span><span class="fixed">,</span>
+  <span class="fixed">time=</span><span class="generated">"today"</span>
+<span class="fixed">)</span></code></pre>
+          <div class="token-legend">
+            <span><span class="swatch swatch-fixed"></span>Template-injected syntax</span>
+            <span><span class="swatch swatch-generated"></span>Model-generated values</span>
+          </div>
+          <p class="template-note">Conceptual example. The public Transformers script uses annotated templates;
+            the paper's extended vLLM engine is not included.</p>
+        </div>
+      </div>
+    </section>
+    <section class="section container" id="research" aria-labelledby="research-title">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">PAPER &amp; IMPLEMENTATION</p>
+          <h2 id="research-title">Built for research.<br>Ready to explore.</h2>
+        </div>
+        <p class="section-description">Study low-latency LLM tool calling, soft-token conditioning,
+          large/small model cooperation, and Berkeley Function Calling Leaderboard (BFCL) evaluation.</p>
+      </div>
+      <div class="research-grid">
+        <article class="paper-card">
+          <span class="badge">KDD 2026 &middot; pp. 819-830</span>
+          <h3 id="paper-title">HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating</h3>
+          <p class="paper-authors">Weibin Liao, Jian-Guang Lou, and Haoyi Xiong</p>
+          <p class="publication-meta">Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1</p>
+          <p class="paper-doi">DOI: <a href="https://doi.org/10.1145/3770854.3780283">10.1145/3770854.3780283</a></p>
+          <div class="paper-links">
+            <a class="button button-primary" href="https://arxiv.org/abs/2602.13665">Open-access preprint <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a>
+            <a class="text-link" href="https://arxiv.org/pdf/2602.13665">Read PDF <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a>
+          </div>
+        </article>
+        <article class="source-card">
+          <p class="kicker">OFFICIAL PYTORCH CODE</p>
+          <h3>Follow the research workflow.</h3>
+          <ol class="resource-list">
+            <li><a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/LML_embedding.py"><span class="resource-number">01</span><span><strong>Large-model embeddings</strong><code>LML_embedding.py</code></span><svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a></li>
+            <li><a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/function_retriever.py"><span class="resource-number">02</span><span><strong>Function retrieval</strong><code>function_retriever.py</code></span><svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a></li>
+            <li><a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/LMS_SFT.py"><span class="resource-number">03</span><span><strong>Small-model training</strong><code>LMS_SFT.py</code></span><svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a></li>
+            <li><a href="https://github.com/MrBlankness/HyFunc/blob/main/codes/dynamic_templating.py"><span class="resource-number">04</span><span><strong>Template-guided inference</strong><code>dynamic_templating.py</code></span><svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a></li>
+          </ol>
+        </article>
+      </div>
+      <div class="setup-panel">
+        <div>
+          <h3>Start with the source.</h3>
+          <p>Run scripts from <code>codes/</code>. Download models and datasets separately,
+            then configure paths, dimensions, and hardware settings.</p>
+          <a class="text-link" href="https://github.com/MrBlankness/HyFunc/blob/main/README.md#getting-started">Setup &amp; reproduction guide <svg class="icon" aria-hidden="true"><use href="#icon-arrow"/></svg></a>
+        </div>
+        <pre aria-label="Clone the repository and enter the scripts directory"><code>git clone https://github.com/MrBlankness/HyFunc.git
+cd HyFunc/codes</code></pre>
+      </div>
+      <p class="scope-note"><span class="scope-marker" aria-hidden="true"></span>Research implementation, not a turnkey agent SDK, MCP server, or hosted API. Read the reproduction notes before running experiments.</p>
+    </section>
+    <section class="section container faq-layout" id="faq" aria-labelledby="faq-title">
+      <div>
+        <p class="kicker">RESEARCH NOTES</p>
+        <h2 id="faq-title">A clearer picture,<br>before you begin.</h2>
+        <p class="section-description">What the method does, what the public code includes,
+          and what reproduction requires.</p>
+      </div>
+      <div class="faq-list">
+        <details>
+          <summary>How does HyFunc accelerate LLM function calling?</summary>
+          <p>HyFunc reduces three sources of redundancy: processing full function descriptions
+            repeatedly, using a large model for full-sequence generation, and generating fixed
+            parameter syntax token by token. A shared soft token supports function retrieval
+            and small-model conditioning; dynamic templating supplies boilerplate syntax.</p>
+        </details>
+        <details>
+          <summary>Does HyFunc use vLLM or Transformers?</summary>
+          <p>The paper describes dynamic templating within an extended vLLM engine.
+            The public <code>codes/dynamic_templating.py</code> example uses Transformers;
+            it does not include that vLLM engine extension and uses
+            <code>true_func_info</code> annotations to construct templates.</p>
+        </details>
+        <details id="reproduction">
+          <summary>Can I directly reproduce the paper's BFCL results?</summary>
+          <p>Not as a one-command workflow. Example paths reference BFCL v3, while the
+            included evaluator has BFCL v4 data. Prepare matching question/answer files
+            and align the retriever's <code>functions</code> result key with the
+            inference example's <code>function</code> key. Configure checkpoint paths,
+            model dimensions, and hardware; download models and data separately.
+            No validated HyFunc dependency lockfile is provided, and the annotated
+            inference example is not annotation-free end-to-end deployment.
+            See the <a href="https://github.com/MrBlankness/HyFunc/blob/main/README.md#research-workflow">full reproduction limits</a>.</p>
+        </details>
+        <details>
+          <summary>What should I know before using or sharing the code?</summary>
+          <p>This is research code for efficient LLM tool calling, not a packaged agent
+            framework or hosted inference service. No root-level HyFunc license is
+            currently present; confirm reuse permissions with the maintainers.
+            Cite the paper when using the method, code, or findings in research,
+            and credit upstream models, datasets, and Gorilla/BFCL resources independently.</p>
+        </details>
+      </div>
+    </section>
+    <section class="section container citation-section" id="citation" aria-labelledby="citation-title">
+      <div class="section-heading">
+        <div>
+          <p class="kicker">BUILD ON THE WORK</p>
+          <h2 id="citation-title">Cite the research.</h2>
+          <p>If you use HyFunc's method, code, or findings in research, please cite the published paper.</p>
+        </div>
+        <a class="text-link" href="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.cff">Structured citation <svg class="icon" aria-hidden="true"><use href="#icon-external"/></svg></a>
+      </div>
+      <div class="citation-panel">
+        <div class="citation-toolbar">
+          <span class="small-label">BIBTEX &middot; KDD 2026</span>
+          <div class="citation-actions">
+            <a href="https://raw.githubusercontent.com/MrBlankness/HyFunc/main/CITATION.bib">Download .bib</a>
+            <button class="button button-small" id="copy-citation" type="button" hidden><svg class="icon" aria-hidden="true"><use href="#icon-copy"/></svg><span id="copy-label">Copy BibTeX</span></button>
+          </div>
+        </div>
+        <pre class="citation-code" tabindex="0" aria-label="BibTeX citation"><code id="bibtex">@inproceedings{liao2026hyfunc,
   author = {Weibin Liao and Jian-Guang Lou and Haoyi Xiong},
   title = {{HyFunc}: Accelerating {LLM}-based Function Calls for Agentic {AI}
            through Hybrid-Model Cascade and Dynamic Templating},
@@ -140,15 +429,20 @@
   doi = {10.1145/3770854.3780283},
   url = {https://doi.org/10.1145/3770854.3780283}
 }</code></pre>
-      <p>Credit upstream models, datasets, and BFCL tooling independently.
-        No root-level HyFunc license is currently present; confirm reuse
-        permissions with the maintainers and review upstream terms.</p>
+      </div>
+      <p class="copy-status" id="copy-status" role="status" aria-live="polite" aria-atomic="true"></p>
     </section>
   </main>
-  <footer>
-    <p><a href="https://github.com/MrBlankness/HyFunc">HyFunc repository</a> &middot;
-      <a href="https://github.com/MrBlankness/HyFunc/blob/main/AGENTS.md">Coding-agent guide</a> &middot;
-      <a href="https://dblp.org/rec/conf/kdd/LiaoLX26">Bibliographic record</a></p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div><a class="footer-brand" href="./">HyFunc</a><p>Efficient function calling for agentic AI.</p></div>
+      <nav aria-label="Additional resources">
+        <a href="https://github.com/MrBlankness/HyFunc">Repository</a>
+        <a href="llms.txt">Agent-readable guide</a>
+        <a href="https://dblp.org/rec/conf/kdd/LiaoLX26">DBLP record</a>
+      </nav>
+      <span class="footer-note">Official research &middot; KDD 2026</span>
+    </div>
   </footer>
 </body>
 </html>

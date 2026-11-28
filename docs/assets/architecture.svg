@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1152" height="420" viewBox="0 0 1152 420" role="img" aria-labelledby="title description">
+  <title id="title">HyFunc: soft-token retrieval, a hybrid-model cascade, and dynamic templating</title>
+  <desc id="description">A user request enters the large model. Its first generated-token embedding provides one soft token for a function retriever and, through a projection, the small model. Precomputed function embeddings support retrieval. Selected functions and dynamically injected syntax guide the small model's parameter generation to produce a function call.</desc>
+  <style>
+    svg { --bg: #ffffff; --panel: #edf1e8; --line: #d8e1d2; --text: #17231c; --muted: #4e6256; --accent: #386321; --soft: #e9f3de; font-family: "Segoe UI", sans-serif; }
+    @media (prefers-color-scheme: dark) {
+      svg { --bg: #101b14; --panel: #142019; --line: #26372a; --text: #edf5e9; --muted: #abbaad; --accent: #d6fb98; --soft: #22331b; }
+    }
+    .canvas { fill: var(--bg); }
+    .panel { fill: var(--panel); stroke: var(--line); }
+    .label { fill: var(--muted); font-size: 11px; font-weight: 600; letter-spacing: 1px; }
+    .body { fill: var(--text); font-size: 16px; font-weight: 600; }
+    .note { fill: var(--muted); font-size: 12px; }
+    .accent { fill: var(--accent); }
+    .soft { fill: var(--soft); stroke: var(--line); }
+    .connector { fill: none; stroke: var(--muted); stroke-width: 1.5; }
+    .vector { fill: none; stroke: var(--bg); stroke-width: 3; stroke-linecap: round; }
+    .mono { font-family: Consolas, monospace; font-size: 13px; fill: var(--accent); }
+  </style>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path class="accent" d="m0 0 10 5-10 5Z"/></marker>
+  </defs>
+  <rect class="canvas" width="1152" height="420"/>
+  <text class="label" x="30" y="38">THE HYFUNC ARCHITECTURE</text>
+  <text class="note" x="1122" y="38" text-anchor="end">Conceptual method overview</text>
+  <path class="connector" d="M212 215h33" marker-end="url(#arrow)"/>
+  <path class="connector" d="M432 215h51" marker-end="url(#arrow)"/>
+  <path class="connector" d="M551 215h33V139h38" marker-end="url(#arrow)"/>
+  <path class="connector" d="M584 215v93h38" marker-end="url(#arrow)"/>
+  <path class="connector" d="M742 88v14" marker-end="url(#arrow)"/>
+  <path class="connector" d="M802 177v94" marker-end="url(#arrow)"/>
+  <path class="connector" d="M862 308h31" marker-end="url(#arrow)"/>
+  <path class="connector" d="M1003 180v58" marker-end="url(#arrow)"/>
+  <rect class="panel" x="30" y="168" width="182" height="94" rx="13"/>
+  <text class="label" x="48" y="193">USER REQUEST</text>
+  <text class="body" x="48" y="218">User intent</text>
+  <text class="note" x="48" y="241">Natural-language query</text>
+  <rect class="panel" x="250" y="168" width="182" height="94" rx="13"/>
+  <text class="label" x="268" y="193">LARGE MODEL / LML</text>
+  <text class="body" x="268" y="218">Encode the intent</text>
+  <text class="note" x="268" y="241">First generated token</text>
+  <rect class="soft" x="477" y="176" width="82" height="78" rx="23"/>
+  <rect class="accent" x="490" y="189" width="56" height="52" rx="14"/>
+  <path class="vector" d="M502 216v-10m10 20v-25m10 19v-12m10 18v-22"/>
+  <text class="label accent" x="518" y="153" text-anchor="middle">ONE SOFT TOKEN</text>
+  <text class="note" x="518" y="278" text-anchor="middle">Shared representation</text>
+  <text class="note" x="606" y="251" text-anchor="middle" transform="rotate(-90 606 251)">projection</text>
+  <rect class="panel" x="627" y="46" width="235" height="42" rx="10"/>
+  <text class="label" x="744" y="63" text-anchor="middle">FUNCTION LIBRARY</text>
+  <text class="note" x="744" y="79" text-anchor="middle">Precomputed function embeddings</text>
+  <rect class="panel" x="627" y="107" width="235" height="70" rx="12"/>
+  <text class="label" x="645" y="133">FUNCTION RETRIEVER</text>
+  <text class="body" x="645" y="157">Select relevant functions</text>
+  <text class="note" x="818" y="225">selected</text>
+  <text class="note" x="818" y="241">functions</text>
+  <rect class="panel" x="627" y="276" width="235" height="82" rx="13"/>
+  <text class="label" x="645" y="301">SMALL MODEL / LMS</text>
+  <text class="body" x="645" y="325">Generate parameter values</text>
+  <text class="note" x="645" y="345">Projected soft-token conditioning</text>
+  <rect class="soft" x="898" y="107" width="214" height="73" rx="12"/>
+  <text class="label accent" x="916" y="133">DYNAMIC TEMPLATING</text>
+  <text class="body" x="916" y="157">Inject fixed syntax</text>
+  <text class="note" x="1017" y="214">boilerplate</text>
+  <rect class="panel" x="898" y="243" width="214" height="115" rx="13"/>
+  <text class="label" x="916" y="269">FUNCTION CALL</text>
+  <text class="mono" x="916" y="298">get_weather(</text>
+  <text class="mono" x="930" y="319">location="Palo Alto"</text>
+  <text class="mono" x="916" y="340">)</text>
+  <text class="note" x="30" y="391">Understand once.</text>
+  <text class="note" x="627" y="391">Retrieve, then delegate.</text>
+  <text class="note" x="898" y="391">Generate only what changes.</text>
+</svg>

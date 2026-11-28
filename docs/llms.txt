@@ -5,7 +5,11 @@
 
 ## Sources
 
-- [Project overview](https://mrblankness.github.io/HyFunc/): method summary, scope, limitations, and citation.
+- [Project overview](https://mrblankness.github.io/HyFunc/): official research overview and paper-reported results.
+- [Method and architecture](https://mrblankness.github.io/HyFunc/#method): soft-token retrieval and the hybrid large/small model cascade.
+- [Dynamic templating](https://mrblankness.github.io/HyFunc/#templating): fixed syntax versus model-generated parameter values.
+- [Research and reproduction notes](https://mrblankness.github.io/HyFunc/#faq): BFCL version alignment, output contracts, annotated templates, and the public implementation's scope.
+- [Copyable citation](https://mrblankness.github.io/HyFunc/#citation): published-paper BibTeX.
 - [Repository source guide](https://raw.githubusercontent.com/MrBlankness/HyFunc/main/llms.txt): implementation map and execution prerequisites.
 - [README](https://github.com/MrBlankness/HyFunc/blob/main/README.md): setup and current reproduction limits.
 - [Published paper](https://doi.org/10.1145/3770854.3780283): HyFunc: Accelerating LLM-based Function Calls for Agentic AI through Hybrid-Model Cascade and Dynamic Templating. Weibin Liao, Jian-Guang Lou, Haoyi Xiong. KDD 2026, pp. 819-830.
